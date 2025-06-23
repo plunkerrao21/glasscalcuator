@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="calculator">
+    <!-- Calculator display -->
+    <div class="display" id="display">0</div>
+    <!-- Calculator buttons -->
+    <div class="buttons">
+      <button class="btn-style">7</button>
+      <button class="btn-style">8</button>
+      <button class="btn-style">9</button>
+      <button class="btn-operator">/</button>
+      <button class="btn-style">4</button>
+      <button class="btn-style">5</button>
+      <button class="btn-style">6</button>
+      <button class="btn-operator">*</button>
+      <button class="btn-style">1</button>
+      <button class="btn-style">2</button>
+      <button class="btn-style">3</button>
+      <button class="btn-operator">-</button>
+      <button class="btn-style">0</button>
+      <button class="btn-style">.</button>
+      <button class="btn-operator">=</button>
+      <button class="btn-operator">+</button>
+      <button id="clear">C</button>
+      <button id="history-btn">📜 History</button>
+    </div>
+    <!-- History overlay panel -->
+    <div class="history-panel" id="history-panel">
+      <div class="history-list" id="history-list"><i>No history yet.</i></div>
+      <button class="clear-history" onclick="clearHistory()">Clear History</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.1/lib/browser/math.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

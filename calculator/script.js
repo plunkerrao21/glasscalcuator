@@ -1,0 +1,122 @@
+   // Get references to DOM elements
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll(".buttons button");
+    const historyPanel = document.getElementById("history-panel");
+    const historyList = document.getElementById("history-list");
+    let currentInput = "0";
+    let history = [];
+
+    // Handle button clicks
+    buttons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const value = button.textContent;
+
+        if (value === "C") {
+          // Clear input
+          currentInput = "0";
+        } else if (value === "=") {
+          // Evaluate expression and add to history
+          try {
+            const result = math.evaluate(currentInput);
+            history.push(currentInput + " = " + result);
+            currentInput = result.toString();
+          } catch {
+            currentInput = "Error";
+          }
+        } else if (value === "📜 History") {
+          // Show history panel
+          showHistory();
+          return;
+        } else {
+          // Append number/operator to input
+          if (currentInput === "0" || currentInput === "Error") {
+            currentInput = value;
+          } else {
+            currentInput += value;
+          }
+        }
+
+        display.textContent = currentInput;
+        resizeFont();
+      });
+    });
+
+    // Adjust font size based on input length
+    function resizeFont() {
+      if (currentInput.length > 14) {
+        display.style.fontSize = "28px";
+      } else if (currentInput.length > 9) {
+        display.style.fontSize = "36px";
+      } else {
+        display.style.fontSize = "48px";
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if (!isNaN(key) || "+-*/.".includes(key)) {
+    // It's a number or operator
+    if (currentInput === "0") {
+      currentInput = key;
+    } else {
+      currentInput += key;
+    }
+  } else if (key === "Enter") {
+    try {
+      const result = math.evaluate(currentInput);
+      history.push(currentInput + " = " + result);
+      currentInput = result.toString();
+    } catch {
+      currentInput = "Error";
+    }
+  } else if (key === "Backspace") {
+    currentInput = currentInput.slice(0, -1) || "0";
+  } else if (key.toLowerCase() === "c") {
+    currentInput = "0";
+  } else {
+    return; // Ignore unrecognized keys
+  }
+
+  display.textContent = currentInput;
+  resizeFont();
+});
+
+
+    // Show history panel and populate with history
+    function showHistory() {
+      if (history.length === 0) {
+        historyList.innerHTML = "<i>No history yet.</i>";
+      } else {
+        historyList.innerHTML = history.map((item) => `<div class="history-item">${item}</div>`).join("");
+      }
+      historyPanel.style.display = "flex";
+    }
+
+    // Clear history and update panel
+    function clearHistory() {
+      history = [];
+      historyList.innerHTML = "<i>No history yet.</i>";
+    }
+
+    // Hide history panel when clicked anywhere on it
+    historyPanel.addEventListener("click", () => {
+      historyPanel.style.display = "none";
+    });
+
+    // Prevent click inside history list or clear button from closing the panel
+    historyList.addEventListener("click", (e) => e.stopPropagation());
+    document.querySelector(".clear-history").addEventListener("click", (e) => e.stopPropagation());
+
+    // Initial font size adjustment
+    resizeFont();
+
+    // --- CHANGES/COMMENTS ---
+    // 1. Fixed CSS: removed misplaced brackets, fixed duplicate display, and improved layout.
+    // 2. Added comments to HTML, CSS, and JS for clarity.
+    // 3. Made history panel absolute and overlay the calculator.
+    // 4. Improved history panel close logic (click outside content closes, not on content).
+    // 5. Ensured history panel always shows "No history yet." if empty.
+    // 6. Grouped and clarified button event logic.
+    // 7. Added grid-column to clear/history buttons for better layout.
+    // 8. Cleaned up and organized code for readability.
