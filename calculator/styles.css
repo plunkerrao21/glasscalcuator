@@ -29,7 +29,7 @@
 
     /* Display styling */
     .display {
-  width: 320px;
+  width: 280px;
   height: 100px;
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 2px solid #333;
@@ -70,6 +70,17 @@
       transition: background 0.3s ease;
       grid-column: span 2;
     }
+    .btn-backspace {
+      background: rgba(255, 0, 0, 0.5);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 24px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      grid-column: span 1;
+    }
 
     /* History button styling */
     #history-btn {
@@ -81,7 +92,7 @@
       padding: 20px;
       cursor: pointer;
       transition: background 0.3s ease;
-      grid-column: span 2;
+      grid-column: span 1;
     }
 
     /* Number button styling */
@@ -112,11 +123,14 @@
     }
 
     /* Button hover effects */
-    .btn-style:hover, .btn-operator:hover, #clear:hover {
+    .btn-style:hover, .btn-operator:hover, #clear:hover , #history-btn:hover, .btn-backspace:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: scale(1.05);
     }
     #clear:hover {
+      background: rgba(255, 0, 0, 0.7);
+    }
+    .btn-backspace:hover {
       background: rgba(255, 0, 0, 0.7);
     }
     .btn-operator:hover {
@@ -174,3 +188,29 @@
     .clear-history:hover {
       background: rgba(255, 0, 0, 0.8);
     }
+
+    /* Add to existing CSS */
+.display {
+  position: relative; /* For absolute positioning of history button */
+  padding-right: 60px; /* Make space for history button */
+}
+
+#history-btn {
+  background: rgba(0, 123, 255, 0.6);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 24px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+}
+
+.btn-backspace {
+  background: rgba(255, 165, 0, 0.6); /* Orange color instead of red */
+}
+
+.btn-backspace:hover {
+  background: rgba(255, 165, 0, 0.8);
+}
+    
